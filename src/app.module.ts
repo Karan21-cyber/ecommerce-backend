@@ -1,13 +1,20 @@
-import { Module } from '@nestjs/common';
-// import { AppController } from './app.controller';
-// import { AppService } from './app.service';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
-// import { UserController } from 'user/user.controller';
+import { LoggerMiddleware } from 'middleware/middleware.middleware';
 
 @Module({
   imports: [PrismaModule, UserModule],
-  // controllers: [AppController, UserController],
-  // providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+  }
+}

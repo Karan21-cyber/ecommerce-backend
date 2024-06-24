@@ -24,7 +24,7 @@ export class UserService {
     return this.prisma.user.findMany();
   }
 
-  async helloServer() {
-    return 'Hello Server is running!';
+  async userRoute() {
+    return 'User Route Serveris running!';
   }
 }

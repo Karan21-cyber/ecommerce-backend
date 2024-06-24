@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 
-@Controller('user')
+@Controller('api/v1/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -27,8 +27,8 @@ export class UserController {
     return this.userService.getUsers();
   }
 
-  @Get('hello')
+  @Get('route')
   async hello() {
-    return this.userService.helloServer();
+    return this.userService.userRoute();
   }
 }

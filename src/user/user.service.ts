@@ -21,7 +21,13 @@ export class UserService {
   }
 
   async getUsers() {
-    return this.prisma.user.findMany();
+    const response = {
+      status: 'success',
+      message: 'User data retrieved successfully',
+      data: await this.prisma.user.findMany(),
+    };
+
+    return response;
   }
 
   async userRoute() {
